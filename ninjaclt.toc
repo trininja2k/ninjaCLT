@@ -1,0 +1,5 @@
+## Interface: 70200
+## Title: ninjaCLT
+## Notes: Set custom lag tolerance to 0 upon login.
+
+ninjaclt.lua
