@@ -1,21 +1,24 @@
 
 do
-	local f = CreateFrame ("frame")
-	local AddonName = ...
-	f:RegisterEvent ("ADDON_LOADED")
+	local nt = CreateFrame ("frame")
+	local AddonName = ninjaCLT
+	nt:RegisterEvent ("ADDON_LOADED")
 	
-	local AdjustCustomLagTolerance = function()
+	local ninjaTweaks = function()
 		if (not InCombatLockdown()) then
 			SetCVar ("SpellQueueWindow", 0)
-			f.Ticker:Cancel()
-			f = nil
+			SetCVar ("cameraDistanceMaxZoomFactor", 2.6)
+			SetCVar ("alwaysCompareItems", 1)
+			MoveViewOutStart (50000)
+			nt.Ticker:Cancel()
+			nt = nil
 		end
 	end
 	
-	f:SetScript ("OnEvent", function (self, event, ...)
-		if (AddonName == ...) then
-			f.Ticker = C_Timer.NewTicker (1, AdjustCustomLagTolerance)
-			f:UnregisterEvent ("ADDON_LOADED")
+	nt:SetScript ("OnEvent", function (self, event, ninjaCLT)
+		if (AddonName == ninjaCLT) then
+			nt.Ticker = C_Timer.NewTicker (1, ninjaTweaks)
+			nt:UnregisterEvent ("ADDON_LOADED")
 			AddonName = nil
 		end
 	end)
